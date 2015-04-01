@@ -7,6 +7,6 @@ out/
 *.iml
 
 # Eclipse #
-.settings/
-.classpath
-.project
+#.settings/#
+#.classpath#
+#.project#
