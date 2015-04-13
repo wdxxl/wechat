@@ -1,6 +1,7 @@
 package com.wdxxl.wechat.controller;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -20,7 +21,8 @@ public class ChatUserControllerTestCase extends SpringTransactionalTestCase {
 	public void setUp() throws Exception {
 		
 	}
-
+	
+	@Ignore
 	@Test
 	public void testGetChatUser() {
 		System.out.println(chatUserController.retrieveChatUserList());

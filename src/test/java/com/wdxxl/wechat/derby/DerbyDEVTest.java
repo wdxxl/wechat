@@ -9,6 +9,7 @@ import java.util.Properties;
 
 import junit.framework.TestCase;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -25,13 +26,14 @@ public class DerbyDEVTest extends TestCase {
     private ResultSet rs;
     private Properties props = new Properties();
    
-    
+	@Ignore
     protected void setUp() throws Exception{
     	Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
     	props.put("user", "wechat");
     	props.put("password", "wechat");
     }
     //First to Run this to Create Table and Schema
+	@Ignore
     @Test
 	public void testCreateTableAndSchema() throws Exception {
         // create and connect the database named derbyLookupDB
@@ -47,6 +49,7 @@ public class DerbyDEVTest extends TestCase {
 	}
 
 	//Second to Check the Table is existed or not
+	@Ignore
 	@Test
 	public void testTableExistAtFisrt() throws SQLException {
 		conn = DriverManager.getConnection("dbc:oracle:thin:@10.52.200.48:1521:orcl", props);
@@ -58,6 +61,7 @@ public class DerbyDEVTest extends TestCase {
 	}
 	
 	//Insert Test Data for Further Used.
+	@Ignore
 	@Test
 	public void testInsertDatas()throws SQLException{
 		conn = DriverManager.getConnection("dbc:oracle:thin:@10.52.200.48:1521:orcl", props);
@@ -66,8 +70,7 @@ public class DerbyDEVTest extends TestCase {
         stmt.execute("insert into DERBYLOOKUP values ('4','city','conty','99502','09 13','Description','405','AW','53','HA','HA53')");
 	}
 	
-	
-	
+	@Ignore
 	protected void tearDown() throws Exception {
 		if(rs!=null){
 			rs.close();

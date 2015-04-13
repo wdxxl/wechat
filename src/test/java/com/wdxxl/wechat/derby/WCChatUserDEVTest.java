@@ -9,6 +9,7 @@ import java.util.Properties;
 
 import junit.framework.TestCase;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -25,7 +26,7 @@ public class WCChatUserDEVTest extends TestCase {
     private ResultSet rs;
     private Properties props = new Properties();
    
-    
+	@Ignore
     protected void setUp() throws Exception{
     	Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
     	props.put("user", "wechat");
@@ -46,6 +47,7 @@ public class WCChatUserDEVTest extends TestCase {
 	}
 
 	//Second to Check the Table is existed or not
+    @Ignore
 	@Test
 	public void testTableExistAtFisrt() throws SQLException {
 		conn = DriverManager.getConnection("dbc:oracle:thin:@10.52.200.48:1521:orcl", props);
@@ -57,6 +59,7 @@ public class WCChatUserDEVTest extends TestCase {
 	}
 	
 	//Insert Test Data for Further Used.
+    @Ignore
 	@Test
 	public void testInsertDatas()throws SQLException{
 		conn = DriverManager.getConnection("dbc:oracle:thin:@10.52.200.48:1521:orcl", props);
@@ -65,7 +68,7 @@ public class WCChatUserDEVTest extends TestCase {
 	}
 	
 	
-	
+    @Ignore
 	protected void tearDown() throws Exception {
 		if(rs!=null){
 			rs.close();
