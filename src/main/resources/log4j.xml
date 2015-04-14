@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- Appenders Console -->
+	<appender name="myConsole" class="org.apache.log4j.ConsoleAppender">  
+        <layout class="org.apache.log4j.PatternLayout">  
+            <param name="ConversionPattern" value="[%d{ISO8601} (%-5p)] %c:%L - %m%n" />  
+        </layout>  
+        <!--user the filter to set logger priority (please notice the level order Min-debug Max-warn)-->  
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">  
+            <param name="levelMin" value="debug" />  
+            <param name="levelMax" value="error" />  
+            <param name="AcceptOnMatch" value="true" />  
+        </filter>  
+    </appender>
+    
+    <!-- Appenders Daily File (\apache-tomcat-7.0.42\logs\webApp.log.2013-12-16 && \apache-tomcat-7.0.42\logs\webApp.log) -->
+    <appender name="dailyFile" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${catalina.home}/logs/wechat/log" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<param name="Append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{ISO8601} (%-5p)] %c:%L - %m%n" />
+		</layout>
+	</appender>
+    
+    <!-- 3rdparty Loggers -->
+    <!-- ignore jboss log -->
+	<logger name="org.mybatis">
+		<level value="OFF" />
+	</logger>
+		<!-- ignore spring log -->
+    <logger name="org.springframework">
+		<level value="OFF" />
+	</logger>
+	 <logger name="com.mchange">
+		<level value="OFF" />
+	</logger>
+    
+	<!-- Root Logger -->
+	<root>
+		<priority value="debug" /> <!--  DEBUG < INFO < WARN < ERROR < FATAL -->
+		<appender-ref ref="myConsole"/>   
+		<appender-ref ref="dailyFile"/>   
+	</root>
+
+</log4j:configuration>
+
+<!-- %c -->
+	<!-- %c -->
+		<!-- com.wdxxl.filter.LoginFilter -->
+	<!-- %c{2} -->
+		<!-- filter.LoginFilter -->
+	<!-- %-20.25c -->
+		<!-- .wdxxl.filter.LoginFilter ()-->
+<!-- %d -->
+	<!-- %d{yyyy/MM/dd HH:mm:ss,SSS} -->
+		<!-- [2013/12/13 16:28:01,626] -->
+	<!-- %d{ABSOLUTE} -->
+		<!-- [16:28:01,626] -->
+	<!-- %d{DATE} -->
+		<!-- [13 \u5341\u4E8C\u6708 2013 16:28:01,626] -->
+	<!-- %d{ISO8601} -->
+		<!-- [2013-12-13 16:28:01,626] -->
+<!-- %L %l -->
+	<!-- %L -->
+		<!-- 50 (show line number) -->
+	<!-- %l -->
+		<!-- com.wdxxl.filter.LoginFilter.doFilter(LoginFilter.java:50) -->
+<!-- %m%n -->
+	<!-- show message and change another line -->
+<!-- %p -->
+	<!-- %-5p -->
+		<!-- [INFO ] (if length less than 5, fill space holder the place) -->
+<!-- %r -->
+	<!--  6539 (log message cost millisecond)-->
+<!-- %t -->
+	<!-- http-bio-9090-exec-7 (Thread information)-->
+
+<!-- ################################################################################################# -->
+
+<!-- 
+Level.ALL\u6253\u5F00\u6240\u6709\u65E5\u5FD7
+Level.DEBUG \u7528\u4E8E\u8C03\u8BD5
+Level.INFO \u7528\u4E8E\u8FD0\u884C\u8FC7\u7A0B
+Level.WARN \u7528\u4E8E\u6F5C\u5728\u7684\u9519\u8BEF
+Level.ERROR \u7528\u4E8E\u9519\u8BEF\u4E8B\u4EF6
+Level.FATAL \u7528\u4E8E\u4E25\u91CD\u9519\u8BEF\u65F6\u95F4
+Level.OFF \u5173\u95ED\u6240\u6709\u65E5\u5FD7
+ -->
+<!-- WARN < INFO < DEBUG -->

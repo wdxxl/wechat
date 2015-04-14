@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +15,7 @@ import com.wdxxl.wechat.utils.WeChatGetPostUtils;
 
 @Repository("tokenService")
 public class TokenServiceImpl implements ITokenService {
-	private static final Log log = LogFactory.getLog(TokenServiceImpl.class);
+	Logger logger = Logger.getLogger(TextMsgRecordServiceImpl.class);
 	
 	@Autowired
 	private ITokenDao tokenDao;
@@ -25,7 +24,7 @@ public class TokenServiceImpl implements ITokenService {
 	@Override
 	public void retrieveNewAccessToken() {
 		try {
-			log.debug("Retrieve the New Access Token by Spring Schedule Job!");
+			logger.debug("Retrieve the New Access Token by Spring Schedule Job!");
 			String accessTokenStr = WeChatGetPostUtils.getInstance().retrieveAccessToken();
 			Token token = new Token();
 			token.setAccessToken(accessTokenStr);
@@ -38,7 +37,7 @@ public class TokenServiceImpl implements ITokenService {
 	
 	@Override
 	public void insertToken(Token token) {
-		log.debug("Manually Retrieve the New Access Token!");
+		logger.debug("Manually Retrieve the New Access Token!");
 		tokenDao.insertToken(token);
 	}
 

@@ -83,4 +83,6 @@
 		<task:scheduled ref="tokenService" method="retrieveNewAccessToken" cron="0 0 0/1 * * ?"/> 
 	</task:scheduled-tasks>
 	
+	<!-- Static File Access -->
+	<mvc:resources location="/resource/"  mapping="/resource/**" /> 
 </beans>
