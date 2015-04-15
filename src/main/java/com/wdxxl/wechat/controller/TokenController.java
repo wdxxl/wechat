@@ -43,6 +43,7 @@ public class TokenController {
 		String accessTokenStr = null;
 		try {
 			accessTokenStr = WeChatGetPostUtils.getInstance().retrieveAccessToken(appid,secret);
+			logger.debug("Access Token: "+accessTokenStr);
 			Token token = new Token();
 			token.setAccessToken(accessTokenStr);
 			token.setCreateTime(new Date());

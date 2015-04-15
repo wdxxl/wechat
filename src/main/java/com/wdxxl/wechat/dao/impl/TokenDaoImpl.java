@@ -15,22 +15,20 @@ import com.wdxxl.wechat.model.Token;
 public class TokenDaoImpl implements ITokenDao {
 	@Autowired
 	private SessionFactory sessionFactory;
-
+	
 	@Override
 	public void insertToken(Token token) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		session.persist(token);
 		session.flush();
-		session.close();//session need to be closed, returned to connection pool.
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Token> retrieveTokenList() {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from Token");
 		List<Token> tokenList = query.list();
-		session.close();//session need to be closed, returned to connection pool.
 		return tokenList;
 	}
 	

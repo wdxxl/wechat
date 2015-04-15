@@ -18,19 +18,17 @@ public class TextMsgRecordDaoImpl implements ITextMsgRecordDao {
 
 	@Override
 	public void insertTextMsgRecord(TextMsgRecord textMsgRecord) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		session.persist(textMsgRecord);
 		session.flush();
-		session.close();//session need to be closed, returned to connection pool.
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<TextMsgRecord> retrieveTextMsgRecordList() {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from TextMsgRecord");
 		List<TextMsgRecord> textMsgRecordList = query.list();
-		session.close();//session need to be closed, returned to connection pool.
 		return textMsgRecordList;
 	}
 	

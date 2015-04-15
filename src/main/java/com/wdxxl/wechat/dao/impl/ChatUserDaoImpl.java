@@ -19,19 +19,17 @@ public class ChatUserDaoImpl implements IChatUserDao {
 
 	@Override
 	public void insertChatUser(ChatUser chatUser) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		session.persist(chatUser);
 		session.flush();
-		session.close();//session need to be closed, returned to connection pool.
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<ChatUser> retrieveChatUserList() {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from ChatUser");
 		List<ChatUser> chatUserList =query.list();
-		session.close();//session need to be closed, returned to connection pool.
 		return chatUserList;
 	}
 	

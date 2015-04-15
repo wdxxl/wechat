@@ -86,6 +86,11 @@
 			<artifactId>spring-oxm</artifactId>
 			<version>${spring-version}</version>
 		</dependency>
+		<dependency><!-- aspectjweaver-1.6.9 -->
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.6.9</version>
+		</dependency>
 	<!-- Spring Unit Test Start -->	
 		<dependency><!-- spring-test -->
 			<groupId>org.springframework</groupId>
