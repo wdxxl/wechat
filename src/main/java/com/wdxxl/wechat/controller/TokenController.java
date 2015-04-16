@@ -51,9 +51,13 @@ public class TokenController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		return accessTokenStr;
-				
 	}
 	
+	@RequestMapping(method = RequestMethod.GET, value="/getCurrentAccessToken")
+	public @ResponseBody String getCurrentAccessToken(){
+		String accessTokenStr = null;
+		accessTokenStr = tokenService.getCurrentAccessToken();
+		return accessTokenStr;
+	}
 }

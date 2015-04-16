@@ -7,4 +7,5 @@ import com.wdxxl.wechat.model.Token;
 public interface ITokenDao {
 	void insertToken(Token token);
 	List<Token> retrieveTokenList();
+	String getCurrentAccessToken();
 }

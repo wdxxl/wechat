@@ -47,5 +47,10 @@ public class TokenServiceImpl implements ITokenService {
 	public List<Token> retrieveTokenList() {
 		return tokenDao.retrieveTokenList();
 	}
+
+	@Override
+	public String getCurrentAccessToken() {
+		return tokenDao.getCurrentAccessToken();
+	}
 	
 }

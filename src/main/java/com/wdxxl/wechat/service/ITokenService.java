@@ -15,4 +15,5 @@ public interface ITokenService {
 	 */
 	void insertToken(Token token);
 	List<Token> retrieveTokenList();
+	String getCurrentAccessToken();
 }

@@ -31,5 +31,19 @@ public class TokenDaoImpl implements ITokenDao {
 		List<Token> tokenList = query.list();
 		return tokenList;
 	}
+
+	@Override
+	public String getCurrentAccessToken() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("select accessToken from Token token order by token.createTime desc");
+		query.setFirstResult(0);
+		query.setMaxResults(1);
+		List<String> tokenList = query.list();
+		if(tokenList!=null&&tokenList.size()>=1){
+			return tokenList.get(0);
+		}else{
+			return null;
+		}
+	}
 	
 }
