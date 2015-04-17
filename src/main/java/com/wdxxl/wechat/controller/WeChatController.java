@@ -116,9 +116,15 @@ public class WeChatController {
       				String newPicUrl2 = "http://124.160.42.240/wechat/resource/image/evun/evun.png";
       				String newUrl2 = "http://www.evun.cn";
       				WeChatNewsItem weChatNewsItem2 = new WeChatNewsItem(newTitle2, newDescription2, newPicUrl2, newUrl2);
+      				String newTitle3 = "吉利汽车编年史...";
+      				String newDescription3 = "(Wikipedia抠的)";
+      				String newPicUrl3 = "http://124.160.42.240/wechat/resource/image/evun/evun.png";
+      				String newUrl3 = "http://mp.weixin.qq.com/s?__biz=MzA5NDUyMTUxNA==&mid=203446829&idx=2&sn=2c4053fa1dfb7fdb6493c417fef1fb7e#rd";
+      				WeChatNewsItem weChatNewsItem3 = new WeChatNewsItem(newTitle3, newDescription3, newPicUrl3, newUrl3);
       				List<WeChatNewsItem> weChatNewsItems= new ArrayList<WeChatNewsItem>();
       				weChatNewsItems.add(weChatNewsItem1);
       				weChatNewsItems.add(weChatNewsItem2);
+      				weChatNewsItems.add(weChatNewsItem3);
       				WeChatNewsResponse newsRes =  new WeChatNewsResponse();
       	        	newsRes.setToUserName(toUserName);
       	        	newsRes.setFromUserName(fromUserName);
