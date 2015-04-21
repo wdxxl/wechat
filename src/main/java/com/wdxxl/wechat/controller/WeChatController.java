@@ -79,14 +79,32 @@ public class WeChatController {
 					textRes.setContent("请回复输入:注册 XXX,完成初始化用户注册。例如:注册 王科学...");
 					resultXML = textRes.getResponseXML();
         		 }else if(event!=null && event.equalsIgnoreCase("click")){//菜单点击事件
-        			String eventKey = requestMap.get("EventKey");
-        			WeChatTextResponse textRes = new WeChatTextResponse();
- 					textRes.setToUserName(toUserName);
- 					textRes.setFromUserName(fromUserName);
- 					textRes.setMsgType("text");
- 					textRes.setCreateTime(System.currentTimeMillis());
- 					textRes.setContent("您点击了: "+eventKey);
- 					resultXML = textRes.getResponseXML();
+        			 String eventKey = requestMap.get("EventKey");
+        			 if(eventKey!=null && eventKey.equalsIgnoreCase("你好")){
+        				 WeChatTextResponse textRes = new WeChatTextResponse();
+        				 textRes.setToUserName(toUserName);
+        				 textRes.setFromUserName(fromUserName);
+        				 textRes.setMsgType("text");
+        				 textRes.setCreateTime(System.currentTimeMillis());
+        				 textRes.setContent("您点击了: "+eventKey);
+        				 resultXML = textRes.getResponseXML();
+        			 }else{
+           				String newTitle3 = "吉利汽车编年史...";
+           				String newDescription3 = "(Wikipedia抠的)";
+           				String newPicUrl3 = "http://124.160.42.240/wechat/resource/image/evun/evun.png";
+           				String newUrl3 = "http://mp.weixin.qq.com/s?__biz=MzA5NDUyMTUxNA==&mid=203446829&idx=2&sn=2c4053fa1dfb7fdb6493c417fef1fb7e#rd";
+           				WeChatNewsItem weChatNewsItem3 = new WeChatNewsItem(newTitle3, newDescription3, newPicUrl3, newUrl3);
+           				List<WeChatNewsItem> weChatNewsItems= new ArrayList<WeChatNewsItem>();
+           				weChatNewsItems.add(weChatNewsItem3);
+           				WeChatNewsResponse newsRes =  new WeChatNewsResponse();
+           	        	newsRes.setToUserName(toUserName);
+           	        	newsRes.setFromUserName(fromUserName);
+           	        	newsRes.setMsgType("news");
+           	        	newsRes.setCreateTime(System.currentTimeMillis());
+           	        	newsRes.setArticleCount(weChatNewsItems.size());
+           	        	newsRes.setWeChatNewsItems(weChatNewsItems);
+           	        	resultXML = newsRes.getResponseXML();
+        			 }
         		 }else{
         			 logger.debug("Event Else.");
         		 }
