@@ -18,6 +18,24 @@ public class MessageUtil {
 	private static final String MESSAGE_MASS_DELETE_POST = "https://api.weixin.qq.com/cgi-bin/message/mass/delete?access_token=";	//删除群发
 	private static final String MESSAGE_MASS_PREVIEW_POST = "https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token=";	//预览接口
 	
+	/**
+	 * 根据分组进行群发
+	 * 
+	 * @param accessToken
+	 * @param reqJson
+	 * @return
+	 */
+	public static String sendAllMessage(String accessToken, String reqJson){
+		String result = null;
+		try {
+			result = HttpClientUtils.Post(MESSAGE_MASS_SENDALL_POST+accessToken, reqJson);
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	/**
 	 * 预览接口

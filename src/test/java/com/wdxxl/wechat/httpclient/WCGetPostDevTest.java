@@ -1,6 +1,7 @@
 package com.wdxxl.wechat.httpclient;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -13,6 +14,8 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.junit.Ignore;
@@ -25,6 +28,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.wdxxl.wechat.service.ITokenService;
 import com.wdxxl.wechat.util.SpringTransactionalTestCase;
 
+
 @ContextConfiguration(locations = { "/spring-mvc-servlet.xml" })
 public class WCGetPostDevTest extends SpringTransactionalTestCase {
 	@Autowired
@@ -32,7 +36,7 @@ public class WCGetPostDevTest extends SpringTransactionalTestCase {
 	
 	@Ignore
 	@Test
-	public void test() throws IOException {
+	public void testPost() throws IOException {
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		
 		Map<String, Object> requestMap = new HashMap<String, Object>();
@@ -84,7 +88,7 @@ public class WCGetPostDevTest extends SpringTransactionalTestCase {
 
 	@Ignore
 	@Test
-	public void test2() throws IOException {
+	public void testGet() throws IOException {
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		String currentToken = tokenService.getCurrentAccessToken();
 
@@ -94,6 +98,41 @@ public class WCGetPostDevTest extends SpringTransactionalTestCase {
 		httpGet.addHeader("Accept", "application/json");
 
 		CloseableHttpResponse response = httpclient.execute(httpGet);
+		int httpCode = response.getStatusLine().getStatusCode();
+		
+		StringBuilder result = new StringBuilder();
+        if (response != null && httpCode == HttpURLConnection.HTTP_OK) {//200
+        	 HttpEntity entity = response.getEntity();
+        	 InputStream inputStream = entity.getContent();
+             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+             BufferedReader reader = new BufferedReader(inputStreamReader);
+             String s;
+             while (((s = reader.readLine()) != null)) {
+                 result.append(s);
+             }
+             reader.close();//关闭输入流
+             JSON jsonObject = (JSON)JSONObject.parse(result.toString());
+             
+             System.out.println(jsonObject.toJSONString()); 
+        }
+        response.close();
+        httpclient.close();
+	}
+
+	@Ignore
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testPostFile() throws IOException{
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		//String currentToken = tokenService.getCurrentAccessToken();
+		//HttpPost httpPost = new HttpPost("https://api.weixin.qq.com/cgi-bin/media/upload?access_token="+ currentToken+"&type=image");
+		HttpPost httpPost = new HttpPost("http://localhost:8080/wechat/uploadMedia?type=image");
+		FileBody bin = new FileBody(new File("C:\\Users\\wangkexue\\Desktop\\ScreenClip.jpg"));  
+        MultipartEntity mpEntity = new MultipartEntity(); // 文件传输  
+        mpEntity.addPart("media", bin);  
+        httpPost.setEntity(mpEntity);  
+		
+		CloseableHttpResponse response = httpclient.execute(httpPost);
 		int httpCode = response.getStatusLine().getStatusCode();
 		
 		StringBuilder result = new StringBuilder();

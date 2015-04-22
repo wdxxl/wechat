@@ -27,6 +27,21 @@ public class MessageController {
 	@Autowired
 	private ITokenService tokenService;
 	
+	@RequestMapping(method = RequestMethod.PUT, value="/sendAllMessage")
+	public @ResponseBody String sendAllMessage(HttpServletRequest request){
+		 StringBuffer jb = new StringBuffer();
+		 String line = null;
+		 try {
+			 BufferedReader reader = request.getReader();
+			 while ((line = reader.readLine()) != null)
+				 jb.append(line);
+		 } catch (Exception e) { 
+			  e.printStackTrace();
+		 }
+		String result = MessageUtil.sendAllMessage(tokenService.getCurrentAccessToken(),jb.toString());
+		return result;
+	}
+	
 	@RequestMapping(method = RequestMethod.PUT, value="/previewMessage")
 	public @ResponseBody String previewMessage(HttpServletRequest request){
 		 StringBuffer jb = new StringBuffer();

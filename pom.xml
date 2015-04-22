@@ -144,6 +144,11 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.4.1</version>
 		</dependency>
+		<dependency><!-- httpmine -->
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.4.1</version>
+		</dependency>
 		<dependency><!-- fastjson -->
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
@@ -156,6 +161,13 @@
           <version>10.2.0.1.0</version>
           <scope>test</scope>
         </dependency>
+        
+        <dependency><!-- commons-fileupload/commons-io -->
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+        
 		
 	</dependencies>
 	<build>
