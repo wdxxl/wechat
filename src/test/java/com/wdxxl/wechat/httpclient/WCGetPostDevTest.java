@@ -15,6 +15,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -153,4 +154,48 @@ public class WCGetPostDevTest extends SpringTransactionalTestCase {
         response.close();
         httpclient.close();
 	}
+	
+	/*
+	@Ignore
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testPostMaterial() throws IOException{
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		
+		Map<String, Object> requestMap = new HashMap<String, Object>();
+		requestMap.put("title", "video title");
+		requestMap.put("introduction", "introduction");
+		//ContentBody requestJson = JSON.toJSONString(requestMap);
+
+		String currentToken = tokenService.getCurrentAccessToken();
+		HttpPost httpPost = new HttpPost("http://api.weixin.qq.com/cgi-bin/material/add_material?access_token="+ currentToken+"&type=image");
+		
+		FileBody bin = new FileBody(new File("C:\\Users\\wangkexue\\Desktop\\ScreenClip.jpg"));  
+        MultipartEntity mpEntity = new MultipartEntity(); // 文件传输  
+        mpEntity.addPart("media", bin);  
+        mpEntity.addPart("description",requestJson);
+        httpPost.setEntity(mpEntity);  
+		
+		CloseableHttpResponse response = httpclient.execute(httpPost);
+		int httpCode = response.getStatusLine().getStatusCode();
+		
+		StringBuilder result = new StringBuilder();
+        if (response != null && httpCode == HttpURLConnection.HTTP_OK) {//200
+        	 HttpEntity entity = response.getEntity();
+        	 InputStream inputStream = entity.getContent();
+             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+             BufferedReader reader = new BufferedReader(inputStreamReader);
+             String s;
+             while (((s = reader.readLine()) != null)) {
+                 result.append(s);
+             }
+             reader.close();//关闭输入流
+             JSON jsonObject = (JSON)JSONObject.parse(result.toString());
+             
+             System.out.println(jsonObject.toJSONString()); 
+        }
+        response.close();
+        httpclient.close();
+	}
+	*/
 }
